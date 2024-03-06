@@ -1,0 +1,30 @@
+
+spring:
+  application:
+    name: platform
+  kafka:
+    bootstrap:
+      servers: localhost:9092
+    topic:
+      name: koffshop-events
+    group:
+      id: load-test-group
+    consumer:
+      mode: false
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/kafka-test
+server:
+  port: 8092
+
+
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus

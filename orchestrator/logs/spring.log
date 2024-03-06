@@ -1,0 +1,20 @@
+2024-03-06 11:59:14.316  INFO 64101 --- [main] c.k.o.OrchestratorApplication            : Starting OrchestratorApplication using Java 18.0.1 on Senthilkumars-MacBook-Pro-2.local with PID 64101 (/Users/senthil/Downloads/work/pj/ci/kafka/kafka-test-java/orchestrator/target/classes started by senthil in /Users/senthil/Downloads/work/pj/ci/kafka/kafka-test-java/orchestrator)
+2024-03-06 11:59:14.318  INFO 64101 --- [main] c.k.o.OrchestratorApplication            : No active profile set, falling back to 1 default profile: "default"
+2024-03-06 11:59:15.049  INFO 64101 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8091 (http)
+2024-03-06 11:59:15.066  INFO 64101 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-06 11:59:15.066  INFO 64101 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2024-03-06 11:59:15.139  INFO 64101 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-06 11:59:15.139  INFO 64101 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 787 ms
+2024-03-06 11:59:15.670  INFO 64101 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2024-03-06 11:59:15.703  INFO 64101 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8091 (http) with context path ''
+2024-03-06 11:59:15.717  INFO 64101 --- [main] c.k.o.OrchestratorApplication            : Started OrchestratorApplication in 1.858 seconds (JVM running for 2.088)
+2024-03-06 12:01:00.112  INFO 64989 --- [main] c.k.o.OrchestratorApplication            : Starting OrchestratorApplication using Java 18.0.1 on Senthilkumars-MacBook-Pro-2.local with PID 64989 (/Users/senthil/Downloads/work/pj/ci/kafka/kafka-test-java/orchestrator/target/classes started by senthil in /Users/senthil/Downloads/work/pj/ci/kafka/kafka-test-java/orchestrator)
+2024-03-06 12:01:00.114  INFO 64989 --- [main] c.k.o.OrchestratorApplication            : No active profile set, falling back to 1 default profile: "default"
+2024-03-06 12:01:00.824  INFO 64989 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8091 (http)
+2024-03-06 12:01:00.831  INFO 64989 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-06 12:01:00.831  INFO 64989 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2024-03-06 12:01:00.892  INFO 64989 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-06 12:01:00.892  INFO 64989 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 744 ms
+2024-03-06 12:01:01.411  INFO 64989 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2024-03-06 12:01:01.443  INFO 64989 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8091 (http) with context path ''
+2024-03-06 12:01:01.456  INFO 64989 --- [main] c.k.o.OrchestratorApplication            : Started OrchestratorApplication in 1.662 seconds (JVM running for 1.89)

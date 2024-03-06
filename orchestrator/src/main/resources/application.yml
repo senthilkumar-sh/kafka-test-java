@@ -1,0 +1,21 @@
+
+spring:
+  application:
+    name: orchestrator
+server:
+  port: 8091
+
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus
+
+logging:
+  file:
+    path: logs
