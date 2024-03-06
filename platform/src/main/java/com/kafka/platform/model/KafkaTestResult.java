@@ -21,6 +21,7 @@ public class KafkaTestResult {
     private String testId;
     private String type;
     private String name;
+    private String producerId;
     private int totalHits;
     private long timeTaken;
     private double recordsPerSec;

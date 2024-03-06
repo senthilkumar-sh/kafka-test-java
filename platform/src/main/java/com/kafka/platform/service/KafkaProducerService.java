@@ -1,6 +1,7 @@
 package com.kafka.platform.service;
 
 import com.kafka.platform.common.Constants;
+import com.kafka.platform.domain.KafkaMessage;
 import com.kafka.platform.domain.KafkaQueryObject;
 import com.kafka.platform.model.KafkaTestResult;
 import com.kafka.platform.model.Latency;
@@ -13,13 +14,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @Service
 public class KafkaProducerService implements Constants {
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, KafkaMessage> kafkaTemplate;
 
     @Autowired
     private KafkaMongoService kafkaMongoService;
@@ -37,11 +39,17 @@ public class KafkaProducerService implements Constants {
         List<Long> latencies = new ArrayList<>(totalHits);
         long producerStart = System.currentTimeMillis();
         String message = Utility.generateRandomString(kqo.getMessageSizeKB() * 1000);
-
+        kqo.setProducerId(UUID.randomUUID().toString());
         for (int i = 1; i <= totalHits; i++) {
             long startMessageTime = System.currentTimeMillis();
             String key = getKey(kqo, producerName, i);
-            kafkaTemplate.send(topicName, key, message);
+
+            kafkaTemplate.send(topicName, key,
+                    KafkaMessage.builder()
+                            .id(UUID.randomUUID().toString())
+                            .message(message)
+                            .build()
+                    );
 
             long timeTakenMessageMs = System.currentTimeMillis() - startMessageTime;
             long endMessageTime = System.currentTimeMillis();
@@ -70,14 +78,14 @@ public class KafkaProducerService implements Constants {
         String key = kqo.getTestId() + "|" + producerName;
         if (i == 1) {
             if (i == kqo.getTotalHits()) {
-                key = key + KEY_SEPERATOR + FIRST_LAST_MESSAGE;
+                key = key + KEY_SEPERATOR + FIRST_LAST_MESSAGE + KEY_SEPERATOR + kqo.getProducerId();
             } else {
-                key = key + KEY_SEPERATOR + FIRST_MESSAGE;
+                key = key + KEY_SEPERATOR + FIRST_MESSAGE + KEY_SEPERATOR + kqo.getProducerId();
             }
         } else if (i == kqo.getTotalHits()) {
-            key = key + KEY_SEPERATOR + LAST_MESSAGE;
+            key = key + KEY_SEPERATOR + LAST_MESSAGE + KEY_SEPERATOR + kqo.getProducerId();
         } else {
-            key = key + KEY_SEPERATOR + MESSAGE;
+            key = key + KEY_SEPERATOR + MESSAGE + KEY_SEPERATOR + kqo.getProducerId();
         }
 
         return key;

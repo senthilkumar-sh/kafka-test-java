@@ -26,5 +26,6 @@ public class KafkaMetrics {
     private float maxLatency;
     private float minLatency;
     private int messageSizeKB;
+    private String producerId;
 
 }

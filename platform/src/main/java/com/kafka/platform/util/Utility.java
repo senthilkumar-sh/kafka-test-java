@@ -68,6 +68,7 @@ public class Utility {
         return KafkaTestResult.builder()
                 .type(type)
                 .totalHits(kqo.getTotalHits())
+                .producerId(kqo.getProducerId())
                 .testId(kqo.getTestId())
                 .name(producerName)
                 .timeTaken(timeTaken)

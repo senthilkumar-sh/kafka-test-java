@@ -1,6 +1,7 @@
 package com.kafka.platform.service;
 
 import com.kafka.platform.common.Constants;
+import com.kafka.platform.domain.KafkaMessage;
 import com.kafka.platform.domain.KafkaMetrics;
 import com.kafka.platform.domain.KafkaQueryObject;
 import com.kafka.platform.model.KafkaTestResult;
@@ -24,7 +25,7 @@ import java.util.Map;
 public class KafkaConsumerService implements Constants {
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, KafkaMessage> kafkaTemplate;
 
     @Autowired
     private KafkaMongoService kafkaMongoService;
@@ -41,8 +42,9 @@ public class KafkaConsumerService implements Constants {
         String key = (consumerRecord.key() != null) ? consumerRecord.key().toString() : "";
         String[] keys = key.split("\\|", -1);
         if (keys.length > 1) {
-            String payload = consumerRecord.toString();
-            System.out.println("received payload length = " + consumerRecord.value().toString().length());
+            //String payload = consumerRecord.toString();
+            KafkaMessage kafkaMessage = (KafkaMessage) consumerRecord.value();
+            System.out.println("received payload length = " + kafkaMessage.getMessage().length());
             //System.out.println("received payload = " + payload);
             processConsumedMessage(keys, consumerRecord);
         }
@@ -54,9 +56,6 @@ public class KafkaConsumerService implements Constants {
 
         // Get the message position fm, fl, m, lm
         String messageKey = keys[2];
-
-        // Consumed payload
-        String payload = consumerRecord.toString();
 
         // Check the message position on given the test id
         if (FIRST_MESSAGE.equals(messageKey)) {
@@ -88,6 +87,7 @@ public class KafkaConsumerService implements Constants {
                 .testId(km.getTestId())
                 .totalHits(km.getLatencies().size())
                 .messageSizeKB(km.getMessageSizeKB())
+                .producerId(km.getProducerId())
                 .build();
         KafkaTestResult ktr = kafkaMongoService.saveTestResult(Utility.constructResult(km.getStartTime(), kqo,
                 km.getLatencyTime(), km.getMinLatency(), km.getMaxLatency(), km.getLatencies(), km.getName(), CONSUMER));
@@ -128,16 +128,18 @@ public class KafkaConsumerService implements Constants {
     }
 
     private KafkaMetrics getFirstLastMessageMetrics(String[] keys, ConsumerRecord<?, ?> consumerRecord) {
+        KafkaMessage kafkaMessage = (KafkaMessage) consumerRecord.value();
         long currentLatency = 0;
         List<Long> latencies = new ArrayList<>(1);
-        int messageSizeKB = (consumerRecord.value().toString().length() / 1000);
+        int messageSizeKB = (kafkaMessage.getMessage().length() / 1000);
         latencies.add(currentLatency);
         long start = System.currentTimeMillis();
         System.out.println("start fl " + start);
         return KafkaMetrics.builder()
                 .testId(keys[0])
-                .name("Consumer1")
+                .name("Consumer-" + keys[1])
                 .type(CONSUMER)
+                .producerId(keys[3])
                 .messageSizeKB(messageSizeKB)
                 .startTime(start)
                 .endTime(System.currentTimeMillis())
@@ -148,51 +150,4 @@ public class KafkaConsumerService implements Constants {
                 .build();
     }
 
-    private KafkaTestResult constructProducerResult(
-            long producerStart, KafkaQueryObject kqo,
-            long latencyTime, float minLatency, float maxLatency,
-            List<Long> latencies, String producerName) {
-
-        long producerEnd = System.currentTimeMillis();
-        long producerTimeTaken = (producerEnd - producerStart);
-        int timeInSec = 1000;
-        int totalHits = kqo.getTotalHits();
-        double records = (double) producerTimeTaken / timeInSec;
-        double rps = (double) totalHits / records;
-        double mb = (double) kqo.getMessageSizeKB() / 1000;
-        double mbs = (double) totalHits * mb;
-        double tps = (double) producerTimeTaken / 1000;
-        double tMBPerSec = mbs / tps;
-
-        Latency latency = Latency.builder()
-                .avg(latencyTime / totalHits)
-                .min(minLatency)
-                .max(maxLatency)
-                .p90(Utility.percentile(latencies, 90))
-                .p95(Utility.percentile(latencies, 95))
-                .p99(Utility.percentile(latencies, 99))
-                .build();
-
-        return KafkaTestResult.builder()
-                .type(Constants.PRODUCER)
-                .testId(kqo.getTestId())
-                .name(producerName)
-                .timeTaken(producerTimeTaken)
-                .recordsPerSec(rps)
-                .throughputMBPerSec(tMBPerSec)
-                .executionDate(new java.util.Date())
-                .latency(latency)
-                .build();
-    }
-
-    public static void main (String args[]) {
-        String key = "faba3fc0-e0b7-4dc5-be86-2b81c4d29900|Producer1|lm";
-        String[] keys = key.split("\\|", -1);
-        System.out.println("Key length = " + keys.length);
-        if (keys.length > 1) {
-            for (String k : keys) {
-                System.out.println("Key = " + k);
-            }
-        }
-    }
 }

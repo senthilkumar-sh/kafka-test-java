@@ -15,4 +15,5 @@ public class KafkaQueryObject {
     private String topic;
     private String testId;
     private int partitions;
+    private String producerId;
 }
