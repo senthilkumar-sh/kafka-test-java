@@ -1,0 +1,416 @@
+openapi: 3.0.3
+info:
+  title: AWS Environment Ondemand APIs
+  description: |-
+    This is an end to end environment ondemand setup api
+  contact:
+    email: apiteam@swagger.io
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://petstore3.swagger.io/api/v3
+tags:
+  - name: Application
+    description: Everything about your Apps
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: Environment
+    description: Environment setup
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+paths:
+  /application/components:
+    get:
+      tags:
+        - Application
+      summary: Get all the components
+      description: List all the components.
+      operationId: getAllComponents
+      parameters:
+        - name: components
+          in: query
+          description: Tags to filter by
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Component'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Component'
+        '400':
+          description: Invalid component
+  /aplication:
+    get:
+      tags:
+        - Application
+      summary: Get all the applications
+      description: List all the applications.
+      operationId: getAllApplications
+      parameters:
+        - name: applications
+          in: query
+          description: Tags to filter by
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Application'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Application'
+        '400':
+          description: Invalid app
+    post:
+      tags:
+        - Application
+      summary: Define a new application releases
+      description: Define a new application
+      operationId: defineApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              allOf:
+                - $ref: '#/components/schemas/Application'
+                - type: object
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+    put:
+      tags:
+        - Application
+      summary: Update an existing application definition
+      description: Update an existing application definition by Id
+      operationId: updateAplication
+      requestBody:
+        description: Update an existent application definition
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Aplication not found
+        '422':
+          description: Validation exception
+  /application/{appId}:
+    get:
+      tags:
+        - Application
+      summary: Find application definition by Id
+      description: Returns a single application definition
+      operationId: getAppDefById
+      parameters:
+        - name: appId
+          in: path
+          description: Id of application definition to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Environments not found
+    delete:
+      tags:
+        - Application
+      summary: Deletes an application definition
+      description: delete a application definition
+      operationId: deleteAppDef
+      parameters:
+        - name: appId
+          in: path
+          description: Application Definition id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid application definition value
+  /environment:
+    get:
+      tags:
+        - Environment
+      summary: Get all the environments
+      description: List all the components.
+      operationId: getAllEnvironments
+      parameters:
+        - name: environments
+          in: query
+          description: Tags to filter by
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Environment'
+        '400':
+          description: Invalid app
+    post:
+      tags:
+        - Environment
+      summary: Create a new environment on aws
+      description: Create a new environment on aws
+      operationId: createEnvironment
+      requestBody:
+        description: Create a new environment in the aws
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Environment'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Environment'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+    put:
+      tags:
+        - Environment
+      summary: Update an existing environment
+      description: Update an existing environment by Id
+      operationId: updateEnvironment
+      requestBody:
+        description: Update an existent environment in the aws
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Environment'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Environment'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Pet not found
+        '422':
+          description: Validation exception
+  /environment/{envId}:
+    get:
+      tags:
+        - Environment
+      summary: Find environment by ID
+      description: Returns a single environment
+      operationId: getEnvById
+      parameters:
+        - name: envId
+          in: path
+          description: ID of environment to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Environment'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Environments not found
+    delete:
+      tags:
+        - Environment
+      summary: Deletes an environment
+      description: delete a environment
+      operationId: deleteEnv
+      parameters:
+        - name: envId
+          in: path
+          description: Environment id to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid environment value
+  /environment/destroy:
+    post:
+      tags:
+        - Environment
+      summary: Destroy an environment
+      description: Destroy an environment
+      operationId: destroyEnvironment
+      requestBody:
+        description: Destroy an application in the aws
+        content:
+          application/json:
+            example: '{"id" : "uuid"}'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+    get:
+      tags:
+        - Environment
+      summary: Get all the destroyed environments
+      description: List all the components.
+      operationId: getAllDestroyedEnvs
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Environment'
+        '400':
+          description: Invalid input
+components:
+  schemas:
+    Component:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 'S3'
+        artifactTye:
+          type: string
+          example: 'Terraform'
+        version:
+          type: string
+          example: '1.1'
+    Application:
+      type: object
+      required:
+        - name
+        - release
+        - components
+      properties:
+        id:
+          type: string
+          example: 'uuid'
+        name:
+          type: string
+          example: 'Name'
+        release:
+          type: string
+          example: '1.1'
+        components:
+          type: array
+          xml:
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Component'
+    Environment:
+      required:
+        - appRelease
+        - awsAccount
+        - namespace
+      type: object
+      properties:
+        id:
+          type: string
+          example: 'uuid'
+        appRelease:
+          type: string
+          example: 'xyz-1.1'
+        awsAccount:
+          type: string
+          example: 'abc'
+        namespace:
+          type: string
+          example: 'xyz-ns'
+      xml:
+        name: environment
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+      xml:
+        name: '##default'
