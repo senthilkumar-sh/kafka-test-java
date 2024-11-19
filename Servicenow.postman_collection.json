@@ -1,0 +1,606 @@
+{
+	"info": {
+		"_postman_id": "6b5616b9-f5dd-4d0c-9c7f-c2ae475cb09d",
+		"name": "Servicenow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "967327"
+	},
+	"item": [
+		{
+			"name": "V1",
+			"item": [
+				{
+					"name": "Create Incident",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "qIhZj4+/Ex5S",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"short_description\": \"New incident creation through REST\",\n    \"comments\": \"These are my comments\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev239665.service-now.com/api/now/v1/table/incident",
+							"protocol": "https",
+							"host": [
+								"dev239665",
+								"service-now",
+								"com"
+							],
+							"path": [
+								"api",
+								"now",
+								"v1",
+								"table",
+								"incident"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Incident By Id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "qIhZj4+/Ex5S",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://dev239665.service-now.com/api/now/v1/table/incident/d8df8e4cc306121097f6bfddd40131cb",
+							"protocol": "https",
+							"host": [
+								"dev239665",
+								"service-now",
+								"com"
+							],
+							"path": [
+								"api",
+								"now",
+								"v1",
+								"table",
+								"incident",
+								"d8df8e4cc306121097f6bfddd40131cb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Incidents",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "qIhZj4+/Ex5S",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://dev239665.service-now.com/api/now/v1/table/incident",
+							"protocol": "https",
+							"host": [
+								"dev239665",
+								"service-now",
+								"com"
+							],
+							"path": [
+								"api",
+								"now",
+								"v1",
+								"table",
+								"incident"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Incident",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "qIhZj4+/Ex5S",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"short_description\": \"V2 Updated incident\",\n    \"comments\": \"V2 This is updated comments\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev239665.service-now.com/api/now/v1/table/incident/d8df8e4cc306121097f6bfddd40131cb?sysparm_exclude_ref_link=true",
+							"protocol": "https",
+							"host": [
+								"dev239665",
+								"service-now",
+								"com"
+							],
+							"path": [
+								"api",
+								"now",
+								"v1",
+								"table",
+								"incident",
+								"d8df8e4cc306121097f6bfddd40131cb"
+							],
+							"query": [
+								{
+									"key": "sysparm_exclude_ref_link",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "V2",
+			"item": [
+				{
+					"name": "Create Incident",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "qIhZj4+/Ex5S",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"short_description\": \"V2 incident creation through REST\",\n    \"comments\": \"V2 These are my comments\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev239665.service-now.com/api/now/v2/table/incident",
+							"protocol": "https",
+							"host": [
+								"dev239665",
+								"service-now",
+								"com"
+							],
+							"path": [
+								"api",
+								"now",
+								"v2",
+								"table",
+								"incident"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Incident By Id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "qIhZj4+/Ex5S",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://dev239665.service-now.com/api/now/v2/table/incident/22e2d2c0c346121097f6bfddd4013173",
+							"protocol": "https",
+							"host": [
+								"dev239665",
+								"service-now",
+								"com"
+							],
+							"path": [
+								"api",
+								"now",
+								"v2",
+								"table",
+								"incident",
+								"22e2d2c0c346121097f6bfddd4013173"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Incidents",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "qIhZj4+/Ex5S",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://dev239665.service-now.com/api/now/v2/table/incident",
+							"protocol": "https",
+							"host": [
+								"dev239665",
+								"service-now",
+								"com"
+							],
+							"path": [
+								"api",
+								"now",
+								"v2",
+								"table",
+								"incident"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Incident",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "qIhZj4+/Ex5S",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"short_description\": \"V2 Updated incident\",\n    \"comments\": \"V2 This is updated comments\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev239665.service-now.com/api/now/v2/table/incident/22e2d2c0c346121097f6bfddd4013173?sysparm_exclude_ref_link=true",
+							"protocol": "https",
+							"host": [
+								"dev239665",
+								"service-now",
+								"com"
+							],
+							"path": [
+								"api",
+								"now",
+								"v2",
+								"table",
+								"incident",
+								"22e2d2c0c346121097f6bfddd4013173"
+							],
+							"query": [
+								{
+									"key": "sysparm_exclude_ref_link",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delte Incident",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qIhZj4+/Ex5S",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"short_description\": \"Updated incident\",\n    \"comments\": \"This is updated comments\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev239665.service-now.com/api/now/v1/table/incident/d8df8e4cc306121097f6bfddd40131cb",
+					"protocol": "https",
+					"host": [
+						"dev239665",
+						"service-now",
+						"com"
+					],
+					"path": [
+						"api",
+						"now",
+						"v1",
+						"table",
+						"incident",
+						"d8df8e4cc306121097f6bfddd40131cb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Incidents",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qIhZj4+/Ex5S",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev239665.service-now.com/api/now/table/incident",
+					"protocol": "https",
+					"host": [
+						"dev239665",
+						"service-now",
+						"com"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Incidents Copy",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qIhZj4+/Ex5S",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev239665.service-now.com/api/now/account",
+					"protocol": "https",
+					"host": [
+						"dev239665",
+						"service-now",
+						"com"
+					],
+					"path": [
+						"api",
+						"now",
+						"account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://instance.servicenow.com/api/now/account?sysparm_limit=2&sysparm_offset=2>;rel=next \\\n--request GET \\\n--header Accept:application/json",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qIhZj4+/Ex5S",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev239665.service-now.com/api/now/account?sysparm_limit=2&sysparm_offset=2",
+					"protocol": "https",
+					"host": [
+						"dev239665",
+						"service-now",
+						"com"
+					],
+					"path": [
+						"api",
+						"now",
+						"account"
+					],
+					"query": [
+						{
+							"key": "sysparm_limit",
+							"value": "2"
+						},
+						{
+							"key": "sysparm_offset",
+							"value": "2"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl \"https://instance.servicenow.com/api/now/account?sysparm_limit=2&sysparm_offset=2>;rel=\"next\" \\\n--request GET \\\n--header \"Accept:application/json\" \\\n--user 'username':'password'\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Access Token Generate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": " password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": " fcbd03a6cc65455d95dca6a02862f28e",
+							"type": "text"
+						},
+						{
+							"key": "clent_secret",
+							"value": " WxZ+Ya^Iwm",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": " apicallsuser",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": " $#Ycc0TmA$PUQB9lOs)Y>K>ruvNIlY08^0#lhF0EaDlk[rZFoJSG2g6VXw+A(_^pE=5*AlOE9@Yo({$[w$$xSPH{,16k1k!Yczo?",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://dev239665.service-now.com/oauth_token.do",
+					"protocol": "https",
+					"host": [
+						"dev239665",
+						"service-now",
+						"com"
+					],
+					"path": [
+						"oauth_token.do"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
